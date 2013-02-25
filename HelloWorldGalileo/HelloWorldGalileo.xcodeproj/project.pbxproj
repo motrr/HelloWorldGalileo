@@ -18,6 +18,7 @@
 		8375684E16DBFD99002687C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8375684D16DBFD99002687C4 /* Default-568h@2x.png */; };
 		8375685116DBFD99002687C4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8375685016DBFD99002687C4 /* ViewController.m */; };
 		8375685416DBFD99002687C4 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8375685216DBFD99002687C4 /* ViewController.xib */; };
+		8375686116DC2494002687C4 /* GalileoControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375686016DC2494002687C4 /* GalileoControl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		8375684F16DBFD99002687C4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8375685016DBFD99002687C4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8375685316DBFD99002687C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		8375686016DC2494002687C4 /* GalileoControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GalileoControl.framework; path = "../Galileo-iOS-SDK/frameworks/GalileoControl.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 				8375683816DBFD99002687C4 /* UIKit.framework in Frameworks */,
 				8375683A16DBFD99002687C4 /* Foundation.framework in Frameworks */,
 				8375683C16DBFD99002687C4 /* CoreGraphics.framework in Frameworks */,
+				8375686116DC2494002687C4 /* GalileoControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +76,7 @@
 		8375683616DBFD99002687C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8375686016DC2494002687C4 /* GalileoControl.framework */,
 				8375683716DBFD99002687C4 /* UIKit.framework */,
 				8375683916DBFD99002687C4 /* Foundation.framework */,
 				8375683B16DBFD99002687C4 /* CoreGraphics.framework */,
@@ -260,6 +264,10 @@
 		8375685816DBFD99002687C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Galileo-iOS-SDK/frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloWorldGalileo/HelloWorldGalileo-Prefix.pch";
 				INFOPLIST_FILE = "HelloWorldGalileo/HelloWorldGalileo-Info.plist";
@@ -271,6 +279,10 @@
 		8375685916DBFD99002687C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Galileo-iOS-SDK/frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloWorldGalileo/HelloWorldGalileo-Prefix.pch";
 				INFOPLIST_FILE = "HelloWorldGalileo/HelloWorldGalileo-Info.plist";
