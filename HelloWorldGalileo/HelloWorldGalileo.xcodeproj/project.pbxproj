@@ -19,6 +19,8 @@
 		8375685116DBFD99002687C4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8375685016DBFD99002687C4 /* ViewController.m */; };
 		8375685416DBFD99002687C4 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8375685216DBFD99002687C4 /* ViewController.xib */; };
 		8375686116DC2494002687C4 /* GalileoControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375686016DC2494002687C4 /* GalileoControl.framework */; };
+		8375686316DC2DB1002687C4 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375686216DC2DB1002687C4 /* libxml2.dylib */; };
+		8375686516DC2E0A002687C4 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375686416DC2E0A002687C4 /* ExternalAccessory.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		8375685016DBFD99002687C4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8375685316DBFD99002687C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		8375686016DC2494002687C4 /* GalileoControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GalileoControl.framework; path = "../Galileo-iOS-SDK/frameworks/GalileoControl.framework"; sourceTree = "<group>"; };
+		8375686216DC2DB1002687C4 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		8375686416DC2E0A002687C4 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8375686516DC2E0A002687C4 /* ExternalAccessory.framework in Frameworks */,
+				8375686316DC2DB1002687C4 /* libxml2.dylib in Frameworks */,
 				8375683816DBFD99002687C4 /* UIKit.framework in Frameworks */,
 				8375683A16DBFD99002687C4 /* Foundation.framework in Frameworks */,
 				8375683C16DBFD99002687C4 /* CoreGraphics.framework in Frameworks */,
@@ -76,6 +82,8 @@
 		8375683616DBFD99002687C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8375686216DC2DB1002687C4 /* libxml2.dylib */,
+				8375686416DC2E0A002687C4 /* ExternalAccessory.framework */,
 				8375686016DC2494002687C4 /* GalileoControl.framework */,
 				8375683716DBFD99002687C4 /* UIKit.framework */,
 				8375683916DBFD99002687C4 /* Foundation.framework */,
