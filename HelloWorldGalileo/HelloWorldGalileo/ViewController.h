@@ -10,4 +10,9 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *panClockwiseButton;
+@property (weak, nonatomic) IBOutlet UIButton *panAnticlockwiseButton;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+
 @end
