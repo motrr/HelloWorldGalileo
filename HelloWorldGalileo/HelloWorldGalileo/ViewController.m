@@ -26,8 +26,17 @@
 
 - (void) galileoDidConnect
 {
-    UIAlertView* galileoConnectedAlert = [[UIAlertView alloc] initWithTitle:@"Galileo connected!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView* galileoConnectedAlert = [[UIAlertView alloc] initWithTitle:@"Galileo connected!"
+                                                                    message:nil
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles: nil];
     [galileoConnectedAlert show];
+}
+
+- (void) galileoDidDisconnect
+{
+    [[Galileo sharedGalileo] waitForConnection];
 }
 
 - (void)didReceiveMemoryWarning
