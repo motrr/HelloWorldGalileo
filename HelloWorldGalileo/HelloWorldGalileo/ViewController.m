@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <GalileoControl/GalileoControl.h>
 
 @interface ViewController ()
 
@@ -18,6 +19,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [[Galileo sharedGalileo] waitForConnection];
 }
 
 - (void)didReceiveMemoryWarning
