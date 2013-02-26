@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <GalileoControl/GalileoControl.h>
 
-@interface ViewController ()
+@interface ViewController () <GalileoDelegate>
 
 @end
 
@@ -20,7 +20,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [Galileo sharedGalileo].delegate = self;
     [[Galileo sharedGalileo] waitForConnection];
+}
+
+- (void) galileoDidConnect
+{
+    UIAlertView* galileoConnectedAlert = [[UIAlertView alloc] initWithTitle:@"Galileo connected!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [galileoConnectedAlert show];
 }
 
 - (void)didReceiveMemoryWarning
