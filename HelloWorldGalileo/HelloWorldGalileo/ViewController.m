@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <GalileoControl/GalileoControl.h>
 
-@interface ViewController () <GalileoDelegate, PositionControlDelegate>
+@interface ViewController () <GalileoDelegate>
 
 @end
 
@@ -66,14 +66,21 @@
 
 - (IBAction)panClockwise:(id)sender {
     [self disableUI];
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:90.0 notifyDelegate:self waitUntilStationary:NO];
+    void (^completionBlock) (BOOL) = ^(BOOL wasCommandPreempted)
+    {
+        if (!wasCommandPreempted) [self controlDidReachTargetPosition];
+    };
+    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:90.0 completionBlock:completionBlock waitUntilStationary:NO];
 }
 
 - (IBAction)panAnticlockwise:(id)sender {
     [self disableUI];
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:-90.0 notifyDelegate:self waitUntilStationary:NO];
+    void (^completionBlock) (BOOL) = ^(BOOL wasCommandPreempted)
+    {
+        if (!wasCommandPreempted) [self controlDidReachTargetPosition];
+    };
+    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:-90.0 completionBlock:completionBlock waitUntilStationary:NO];
 }
-
 
 #pragma mark -
 #pragma mark PositionControl delegate
