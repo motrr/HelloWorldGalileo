@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GalileoControl/PositionControlDelegate.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <PositionControlDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *panClockwiseButton;
 @property (weak, nonatomic) IBOutlet UIButton *panAnticlockwiseButton;
