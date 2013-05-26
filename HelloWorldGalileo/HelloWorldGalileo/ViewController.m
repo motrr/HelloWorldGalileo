@@ -7,8 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "DialogoConstants.h"
-
 #import <GalileoControl/GalileoControl.h>
 
 @interface ViewController () <GalileoDelegate>
@@ -59,7 +57,7 @@
 
 - (void) disableUI
 {
-    [self.view setUserInteractionEnabled:YES];
+    [self.view setUserInteractionEnabled:NO];
 }
 
 #pragma mark -
