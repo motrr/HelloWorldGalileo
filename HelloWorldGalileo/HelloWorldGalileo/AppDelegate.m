@@ -1,7 +1,3 @@
-//
-//  AppDelegate.m
-//  HelloWorldGalileo
-//
 //  Created by Chris Harding on 2/25/13.
 //  Copyright (c) 2013 Chris Harding. All rights reserved.
 //
@@ -15,20 +11,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
-    
-    NSString *logFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    
-    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
     
     return YES;
 }

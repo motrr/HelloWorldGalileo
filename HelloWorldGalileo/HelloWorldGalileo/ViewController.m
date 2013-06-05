@@ -1,7 +1,3 @@
-//
-//  ViewController.m
-//  HelloWorldGalileo
-//
 //  Created by Chris Harding on 2/25/13.
 //  Copyright (c) 2013 Chris Harding. All rights reserved.
 //
@@ -21,7 +17,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     // Start waiting for Galileo to connect
-    [self enableUI];
+    [self disableUI];
     [Galileo sharedGalileo].delegate = self;
     [[Galileo sharedGalileo] waitForConnection];
 }
@@ -29,6 +25,8 @@
 - (void)viewDidUnload {
     [self setPanClockwiseButton:nil];
     [self setStatusLabel:nil];
+    [self setTiltClockwiseButton:nil];
+    [self setTiltAnticlockwiseButton:nil];
     [super viewDidUnload];
 }
 
@@ -69,7 +67,6 @@
     {
         if (!wasCommandPreempted) [self controlDidReachTargetPosition];
     };
-    
     [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:90.0
                                                                                     completionBlock:completionBlock waitUntilStationary:NO];
 }
@@ -87,59 +84,26 @@
 
 - (IBAction)tiltClockwise:(id)sender {
     [self disableUI];
-    
+    void (^completionBlock) (BOOL) = ^(BOOL wasCommandPreempted)
+    {
+        if (!wasCommandPreempted) [self controlDidReachTargetPosition];
+    };
     [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisTilt] incrementTargetPosition:90
-                                                                                      notifyDelegate:self
+                                                                                     completionBlock:completionBlock
                                                                                  waitUntilStationary:NO];
 }
 
 - (IBAction)tiltAnticlockwise:(id)sender {
     [self disableUI];
-    
+    void (^completionBlock) (BOOL) = ^(BOOL wasCommandPreempted)
+    {
+        if (!wasCommandPreempted) [self controlDidReachTargetPosition];
+    };
     [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisTilt] incrementTargetPosition:-90
-                                                                                      notifyDelegate:self
+                                                                                     completionBlock:completionBlock
                                                                                  waitUntilStationary:NO];
 }
 
-- (IBAction)tiltVelocityUp:(id)sender
-{
-    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:90.0];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:0.0];
-    });
-}
-
-- (IBAction)tiltVelocityDown:(id)sender
-{
-    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:-90.0];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:0.0];
-    });
-}
-
-- (IBAction)panVelocityDown:(id)sender
-{
-    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:-90.0];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:0.0];
-    });
-}
-
-- (IBAction)panVelocityUp:(id)sender
-{
-    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:90.0];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:0.0];
-    });
-}
 
 #pragma mark -
 #pragma mark PositionControl delegate
@@ -148,11 +112,6 @@
 {
     // Re-enable the UI now that the target has been reached, assuming we are still connected to Galileo
     if ([[Galileo sharedGalileo] isConnected]) [self enableUI];
-}
-
-- (void) controlDidOverrideMovement
-{
-    
 }
 
 
