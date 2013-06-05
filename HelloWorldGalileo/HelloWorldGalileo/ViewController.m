@@ -21,6 +21,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     // Start waiting for Galileo to connect
+    [self enableUI];
     [Galileo sharedGalileo].delegate = self;
     [[Galileo sharedGalileo] waitForConnection];
 }
@@ -43,8 +44,7 @@
 
 - (void) enableUI
 {
-    self.panClockwiseButton.enabled = true;
-    self.panAnticlockwiseButton.enabled = true;
+    [self.view setUserInteractionEnabled:YES];
 }
 
 - (void) galileoDidDisconnect
@@ -57,8 +57,7 @@
 
 - (void) disableUI
 {
-    self.panClockwiseButton.enabled = false;
-    self.panAnticlockwiseButton.enabled = false;
+    [self.view setUserInteractionEnabled:NO];
 }
 
 #pragma mark -
@@ -70,7 +69,9 @@
     {
         if (!wasCommandPreempted) [self controlDidReachTargetPosition];
     };
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:90.0 completionBlock:completionBlock waitUntilStationary:NO];
+    
+    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:90.0
+                                                                                    completionBlock:completionBlock waitUntilStationary:NO];
 }
 
 - (IBAction)panAnticlockwise:(id)sender {
@@ -79,7 +80,65 @@
     {
         if (!wasCommandPreempted) [self controlDidReachTargetPosition];
     };
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:-90.0 completionBlock:completionBlock waitUntilStationary:NO];
+    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:-90.0
+                                                                                    completionBlock:completionBlock
+                                                                                waitUntilStationary:NO];
+}
+
+- (IBAction)tiltClockwise:(id)sender {
+    [self disableUI];
+    
+    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisTilt] incrementTargetPosition:90
+                                                                                      notifyDelegate:self
+                                                                                 waitUntilStationary:NO];
+}
+
+- (IBAction)tiltAnticlockwise:(id)sender {
+    [self disableUI];
+    
+    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisTilt] incrementTargetPosition:-90
+                                                                                      notifyDelegate:self
+                                                                                 waitUntilStationary:NO];
+}
+
+- (IBAction)tiltVelocityUp:(id)sender
+{
+    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:90.0];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:0.0];
+    });
+}
+
+- (IBAction)tiltVelocityDown:(id)sender
+{
+    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:-90.0];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisTilt] setTargetVelocity:0.0];
+    });
+}
+
+- (IBAction)panVelocityDown:(id)sender
+{
+    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:-90.0];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:0.0];
+    });
+}
+
+- (IBAction)panVelocityUp:(id)sender
+{
+    [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:90.0];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[[Galileo sharedGalileo] velocityControlForAxis:GalileoControlAxisPan] setTargetVelocity:0.0];
+    });
 }
 
 #pragma mark -
@@ -91,6 +150,10 @@
     if ([[Galileo sharedGalileo] isConnected]) [self enableUI];
 }
 
+- (void) controlDidOverrideMovement
+{
+    
+}
 
 
 @end
