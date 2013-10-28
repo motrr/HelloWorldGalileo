@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8307E209181E6105004344C3 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8307E208181E6105004344C3 /* CoreBluetooth.framework */; };
 		8375683816DBFD99002687C4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375683716DBFD99002687C4 /* UIKit.framework */; };
 		8375683A16DBFD99002687C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375683916DBFD99002687C4 /* Foundation.framework */; };
 		8375683C16DBFD99002687C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375683B16DBFD99002687C4 /* CoreGraphics.framework */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8307E208181E6105004344C3 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8375683416DBFD99002687C4 /* HelloWorldGalileo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloWorldGalileo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8375683716DBFD99002687C4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8375683916DBFD99002687C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8307E209181E6105004344C3 /* CoreBluetooth.framework in Frameworks */,
 				8375686516DC2E0A002687C4 /* ExternalAccessory.framework in Frameworks */,
 				8375686316DC2DB1002687C4 /* libxml2.dylib in Frameworks */,
 				8375683816DBFD99002687C4 /* UIKit.framework in Frameworks */,
@@ -82,6 +85,7 @@
 		8375683616DBFD99002687C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8307E208181E6105004344C3 /* CoreBluetooth.framework */,
 				8375686216DC2DB1002687C4 /* libxml2.dylib */,
 				8375686416DC2E0A002687C4 /* ExternalAccessory.framework */,
 				8375686016DC2494002687C4 /* GalileoControl.framework */,

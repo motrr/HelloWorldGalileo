@@ -5,7 +5,7 @@
 #import "ViewController.h"
 #import <GalileoControl/GalileoControl.h>
 
-@interface ViewController () <GalileoDelegate>
+@interface ViewController () <GCGalileoDelegate>
 
 @end
 
@@ -18,8 +18,8 @@
     
     // Start waiting for Galileo to connect
     [self disableUI];
-    [Galileo sharedGalileo].delegate = self;
-    [[Galileo sharedGalileo] waitForConnection];
+    [GCGalileo sharedGalileo].delegate = self;
+    [[GCGalileo sharedGalileo] waitForConnection];
 }
 
 - (void)viewDidUnload {
@@ -50,7 +50,7 @@
     [self disableUI];
     self.statusLabel.text = @"Galileo is not connected";
     self.statusLabel.textColor = [UIColor redColor];
-    [[Galileo sharedGalileo] waitForConnection];
+    [[GCGalileo sharedGalileo] waitForConnection];
 }
 
 - (void) disableUI
@@ -67,7 +67,7 @@
     {
         if (!wasCommandPreempted) [self controlDidReachTargetPosition];
     };
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:90.0
+    [[[GCGalileo sharedGalileo] positionControlForAxis:GCControlAxisPan] incrementTargetPosition:90.0
                                                                                     completionBlock:completionBlock waitUntilStationary:NO];
 }
 
@@ -77,7 +77,7 @@
     {
         if (!wasCommandPreempted) [self controlDidReachTargetPosition];
     };
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisPan] incrementTargetPosition:-90.0
+    [[[GCGalileo sharedGalileo] positionControlForAxis:GCControlAxisPan] incrementTargetPosition:-90.0
                                                                                     completionBlock:completionBlock
                                                                                 waitUntilStationary:NO];
 }
@@ -88,7 +88,7 @@
     {
         if (!wasCommandPreempted) [self controlDidReachTargetPosition];
     };
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisTilt] incrementTargetPosition:90
+    [[[GCGalileo sharedGalileo] positionControlForAxis:GCControlAxisTilt] incrementTargetPosition:90
                                                                                      completionBlock:completionBlock
                                                                                  waitUntilStationary:NO];
 }
@@ -99,7 +99,7 @@
     {
         if (!wasCommandPreempted) [self controlDidReachTargetPosition];
     };
-    [[[Galileo sharedGalileo] positionControlForAxis:GalileoControlAxisTilt] incrementTargetPosition:-90
+    [[[GCGalileo sharedGalileo] positionControlForAxis:GCControlAxisTilt] incrementTargetPosition:-90
                                                                                      completionBlock:completionBlock
                                                                                  waitUntilStationary:NO];
 }
@@ -111,7 +111,7 @@
 - (void) controlDidReachTargetPosition
 {
     // Re-enable the UI now that the target has been reached, assuming we are still connected to Galileo
-    if ([[Galileo sharedGalileo] isConnected]) [self enableUI];
+    if ([[GCGalileo sharedGalileo] isConnected]) [self enableUI];
 }
 
 
